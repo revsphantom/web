@@ -1,0 +1,40 @@
+/* styles.css */
+body {
+    background-image: url('background.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    padding: 100px;
+    font-size: 48px;
+    text-shadow: 2px 2px 2px #000000;
+    text-decoration: underline;
+    font-family: Arial, Helvetica, sans-serif;
+    color: darkorange;
+    
+
+}
+
+.content {
+    text-align: center;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+footer {
+    position: absolute;
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: rgb(3, 3, 3);
+    text-align: center;
+}
