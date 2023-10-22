@@ -1,40 +1,85 @@
 /* styles.css */
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background-image: url('background.gif');
+    background-color: #000000;
+    background-color: #181818;
+    background-image: url(background.gif);
+    background-blend-mode:color-dodge;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     margin: 0;
     padding: 0;
     height: 100vh;
-    overflow: hidden;
+    overflow: hidden
 }
 
 h1 {
+    font-family: 'Press Start 2P', cursive;
     text-align: center;
-    padding: 100px;
+    position: center;
+    padding: 50px;
+    margin: 0 auto;
     font-size: 48px;
-    text-shadow: 2px 2px 2px #000000;
-    text-decoration: underline;
-    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 1px 5px 2px #007bff84;
     color: darkorange;
-    
-
+    background: #000000ba;
 }
 
 .content {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 15px;
+    color: rgb(55, 200, 26);
     text-align: center;
-    padding: 20px;
+    text-shadow: 1px 1px 1px #000000;
+    padding: 15px;
+    background: #000000ba;
     margin: 0 auto;
 }
 
 footer {
     position: absolute;
-    font-size: 12px;
+    font-size: 10px;
     font-family: 'Roboto', sans-serif;
     left: 0;
     bottom: 0;
     width: 100%;
-    color: rgb(3, 3, 3);
+    color: black;
     text-align: center;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #ffffff; 
+}
+
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: #333; 
+    padding: 10px 0; 
+}
+
+.navbar li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: darkorange;
 }
