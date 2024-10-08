@@ -42,20 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target.tagName === 'A') {
             e.preventDefault();
             closeMenu();
-            
-            const targetId = e.target.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                const headerOffset = header.offsetHeight;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-            }
+            scrollToTarget(e.target.getAttribute('href'));
         }
     });
 
@@ -68,26 +55,26 @@ document.addEventListener('DOMContentLoaded', function() {
     allLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                if (mobileMenu.classList.contains('active')) {
-                    closeMenu();
-                }
-
-                const headerOffset = header.offsetHeight;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+            if (mobileMenu.classList.contains('active')) {
+                closeMenu();
             }
+            scrollToTarget(this.getAttribute('href'));
         });
     });
+
+    function scrollToTarget(targetId) {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            const headerOffset = header.offsetHeight;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+    }
 
     window.addEventListener('scroll', function() {
         const scrollPosition = window.scrollY;
@@ -109,32 +96,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     window.dispatchEvent(new Event('scroll'));
-
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const token = turnstile.getResponse();
-            
-            if (!token) {
-                alert('CAPTCHA Invalid!');
-                return false;
-            }
-            
-            let input = document.querySelector('[name="cf-turnstile-response"]');
-            if (!input) {
-                input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'cf-turnstile-response';
-                this.appendChild(input);
-            }
-            input.value = token;
-            
-            this.submit();
-            alert('Your message has been sent!');
-            this.reset();
-            turnstile.reset();
-        });
-    }
 });
