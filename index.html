@@ -1,38 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>revsphantom</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
+
 <body>
-    <div class="hamburger-menu">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-    </div>
-    <nav class="menu-items">
-        <ul>
-            <li><a href="/assets/pages/about.html">about</a></li>
-            <li><a href="/assets/pages/writeups.html">writeups</a></li>
-            <li><a href="/assets/pages/contact.html">contact</a></li>
-        </ul>
-    </nav>
+    <div class="background-container"></div>
     <header>
-        <h1>revsphantom</h1>
+        <div class="header-content">
+            <h1 class="site-title">
+                <a href="#top">revsphantom</a>
+            </h1>
+            <nav class="desktop-menu">
+                <ul>
+                    <li>
+                        <a href="#about">about</a>
+                    </li>
+                    <li>
+                        <a href="#writeups">writeups</a>
+                    </li>
+                    <li>
+                        <a href="#contact">contact</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="hamburger-menu">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+        </div>
     </header>
-    <section class="content">
-        <h2>🚧 Site Under Construction 🚧</h2>
-        <p>This website is currently under construction. Please check back again later.</p>
-    </section>
+    <main id="top">
+        <section id="home">
+            <h1 class="main-title">revsphantom</h1>
+            <div class="content">
+                <h2>🚧 Site Under Construction 🚧</h2>
+                <p>This website is currently under construction. Please check back again later.</p>
+            </div>
+        </section>
+        <section id="about">
+            <h2>about</h2>
+            <p>I have been around computers since the 90's when I was a child. </p>
+            <img src="/assets/images/about_image.avif" alt="about revsphantom" class="about-image">
+        </section>
+        <section id="writeups">
+            <h2>writeups</h2>
+            <p>Future writeups will be posted here maybe.</p>
+        </section>
+        <section id="contact">
+            <h2>contact</h2>
+            <p>Not sure if this is working yet lol.</p>
+            <form id="contactForm" action="https://formsubmit.co/el/datuxo" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="_subject" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <div style="display: block; flex-flow: row;">
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAw7mJqJp7vS0HnI" data-size="flexible"></div>
+                </div>
+                <input type="text" name="_honey" style="display:none">
+                <input type="submit" value="Send">
+            </form>
+        </section>
+    </main>
     <footer>
         <a href="https://github.com/revsphantom" class="github-button" target="_blank">
             <i class="fab fa-github"></i>
         </a>
     </footer>
-    <script src="/assets/js/main.js"></script>
+    <nav class="mobile-menu">
+        <ul>
+            <li>
+                <a href="#about">about</a>
+            </li>
+            <li>
+                <a href="#writeups">writeups</a>
+            </li>
+            <li>
+                <a href="#contact">contact</a>
+            </li>
+        </ul>
+    </nav>
+    <script src="main.js"></script>
 </body>
+
 </html>
