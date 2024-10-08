@@ -89,25 +89,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-window.addEventListener('scroll', function() {
-    const scrollPosition = window.scrollY;
-    const headerHeight = header.offsetHeight;
-    const mainTitlePosition = mainTitle.offsetTop;
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY;
+        const headerHeight = header.offsetHeight;
+        const mainTitlePosition = mainTitle.offsetTop;
 
-    if (scrollPosition > mainTitlePosition - headerHeight) {
-        siteTitle.style.opacity = '1';
-        mainTitle.style.transform = 'translateY(-100%)';
-        mainTitle.style.opacity = '0';
-    } else {
-        siteTitle.style.opacity = '0';
-        mainTitle.style.transform = 'translateY(0)';
-        mainTitle.style.opacity = '1';
-    }
+        if (scrollPosition > mainTitlePosition - headerHeight) {
+            siteTitle.style.opacity = '1';
+            mainTitle.style.transform = 'translateY(-100%)';
+            mainTitle.style.opacity = '0';
+        } else {
+            siteTitle.style.opacity = '0';
+            mainTitle.style.transform = 'translateY(0)';
+            mainTitle.style.opacity = '1';
+        }
 
-    backgroundContainer.style.transform = `translateY(${scrollPosition * 0.3}px)`;
-
-    backgroundContainer.style.backgroundPosition = `center ${scrollPosition * 0.5}px`; // You can adjust 0.5 as needed
-});
+        backgroundContainer.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+        backgroundContainer.style.backgroundPosition = `center ${scrollPosition * 0.5}px`;
+    });
 
     window.dispatchEvent(new Event('scroll'));
 
@@ -116,12 +115,21 @@ window.addEventListener('scroll', function() {
         contactForm.addEventListener('submit', function(event) {
             event.preventDefault();
             
-            const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]');
+            const token = turnstile.getResponse();
             
-            if (!turnstileResponse || !turnstileResponse.value) {
-                alert('Please complete the Cloudflare Turnstile challenge.');
+            if (!token) {
+                alert('CAPTCHA Invalid!');
                 return false;
             }
+            
+            let input = document.querySelector('[name="cf-turnstile-response"]');
+            if (!input) {
+                input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'cf-turnstile-response';
+                this.appendChild(input);
+            }
+            input.value = token;
             
             this.submit();
             alert('Your message has been sent!');

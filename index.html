@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
-
 <body>
     <div class="background-container"></div>
     <header>
@@ -67,10 +65,10 @@
                 <input type="text" id="subject" name="_subject" required>
                 <label for="message">Message:</label>
                 <textarea id="message" name="message" required></textarea>
-                <div style="display: block; flex-flow: row;">
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAw7mJqJp7vS0HnI" data-size="flexible"></div>
-                </div>
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAAw7mJqJp7vS0HnI"></div>
+                <input type="hidden" name="_captcha" value="false">
                 <input type="text" name="_honey" style="display:none">
+                <input type="hidden" name="_template" value="table">
                 <input type="submit" value="Send">
             </form>
         </section>
@@ -95,5 +93,4 @@
     </nav>
     <script src="main.js"></script>
 </body>
-
 </html>
