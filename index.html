@@ -135,19 +135,9 @@
                 });
                 
                 console.log('Response status:', response.status);
-                console.log('Response headers:', response.headers);
                 
-                const responseText = await response.text();
-                console.log('Response text:', responseText);
-                
-                let data;
-                try {
-                    data = JSON.parse(responseText);
-                } catch (parseError) {
-                    console.error('Error parsing JSON:', parseError);
-                    showAlert('Server response was not valid JSON. Please try again.');
-                    return;
-                }
+                const data = await response.json();
+                console.log('Response data:', data);
                 
                 if (data.success) {
                     document.getElementById('verification-container').style.display = 'none';
@@ -170,7 +160,7 @@
                 showAlert('An error occurred during verification. Please try again.');
             }
         }
-    
+
         function showAlert(message) {
             const alertContainer = document.getElementById('alert-container');
             const alertElement = document.getElementById('alert-message');
@@ -182,7 +172,7 @@
                 alertElement.textContent = '';
             }, 5000);
         }
-    
+
         document.addEventListener('DOMContentLoaded', async function() {
             try {
                 const response = await fetch('/check-verification');
