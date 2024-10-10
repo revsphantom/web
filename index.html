@@ -6,7 +6,6 @@
     <title>Verification Required - revsphantom</title>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             display: flex;
@@ -39,7 +38,7 @@
             align-items: center;
         }
         #alert-message {
-            font-family: "Press Start 2P", cursive;
+            font-family: "Press Start 2P";
             font-size: 14px;
             color: #ff0000;
             background-color: rgba(0, 0, 0, 0.7);
@@ -50,7 +49,7 @@
             max-width: 90%;
         }
         h1 {
-            font-family: "Press Start 2P", cursive;
+            font-family: "Press Start 2P";
             font-size: 24px;
             color: #ffa500;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -67,7 +66,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-family: "Press Start 2P", cursive;
+            font-family: "Press Start 2P";
             font-size: 36px;
             color: #00ff00;
             white-space: nowrap;
@@ -133,7 +132,9 @@
                     body: JSON.stringify({ token }),
                 });
                 
-                if (response.ok) {
+                const data = await response.json();
+                
+                if (data.success) {
                     document.getElementById('verification-container').style.display = 'none';
                     const accessGranted = document.getElementById('access-granted');
                     accessGranted.style.display = 'block';
@@ -165,6 +166,21 @@
                 alertElement.textContent = '';
             }, 5000);
         }
+
+        // Check verification on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const response = await fetch('/check-verification');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.verified) {
+                        window.location.href = 'main.html';
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking verification:', error);
+            }
+        });
     </script>
 </body>
 </html>
