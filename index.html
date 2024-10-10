@@ -135,22 +135,30 @@
             .then(data => {
                 if (data.success) {
                     document.getElementById('verification-container').style.display = 'none';
-                    document.getElementById('access-granted').style.display = 'block';
+                    const accessGranted = document.getElementById('access-granted');
+                    accessGranted.style.display = 'block';
+                    accessGranted.classList.add('slide-across');
                     setTimeout(() => {
                         window.location.href = '/main.html';
-                    }, 2000);
+                    }, 4000);
                 } else {
-                    const alertMessage = document.getElementById('alert-message');
-                    alertMessage.textContent = 'Verification failed. Please try again.';
-                    alertMessage.style.display = 'block';
+                    showAlert('Verification failed. Please try again.');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                const alertMessage = document.getElementById('alert-message');
-                alertMessage.textContent = 'An error occurred. Please try again.';
-                alertMessage.style.display = 'block';
+                showAlert('An error occurred. Please try again.');
             });
+        }
+
+        function showAlert(message) {
+            const alertContainer = document.getElementById('alert-container');
+            const alertMessage = document.getElementById('alert-message');
+            alertMessage.textContent = message;
+            alertContainer.style.display = 'flex';
+            setTimeout(() => {
+                alertContainer.style.display = 'none';
+            }, 3000);
         }
 
         function checkVerification() {
