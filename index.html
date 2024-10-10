@@ -124,6 +124,7 @@
 
     <script>
         function onVerification(token) {
+            console.log('Sending token to /verify:', token);
             fetch('/verify', {
                 method: 'POST',
                 headers: {
@@ -131,7 +132,13 @@
                 },
                 body: JSON.stringify({ token: token }),
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log('Response from /verify:', response);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     document.getElementById('verification-container').style.display = 'none';
@@ -146,8 +153,8 @@
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
-                showAlert('An error occurred. Please try again.');
+                console.error('Error during verification:', error);
+                showAlert('An error occurred during verification.');
             });
         }
 
@@ -170,7 +177,7 @@
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error('Error during check verification:', error);
             });
         }
 
