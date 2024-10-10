@@ -124,6 +124,8 @@
     <script>
         async function onVerification(token) {
             try {
+                console.log('Verification token received:', token);
+                
                 const response = await fetch('/verify', {
                     method: 'POST',
                     headers: {
@@ -132,7 +134,20 @@
                     body: JSON.stringify({ token }),
                 });
                 
-                const data = await response.json();
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                
+                const responseText = await response.text();
+                console.log('Response text:', responseText);
+                
+                let data;
+                try {
+                    data = JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error('Error parsing JSON:', parseError);
+                    showAlert('Server response was not valid JSON. Please try again.');
+                    return;
+                }
                 
                 if (data.success) {
                     document.getElementById('verification-container').style.display = 'none';
@@ -147,14 +162,15 @@
                         }, 2000);
                     }, 2000);
                 } else {
-                    showAlert('Verification failed. Please try again.');
+                    console.error('Verification failed:', data);
+                    showAlert(data.message || 'Verification failed. Please try again.');
                 }
             } catch (error) {
-                console.error('Error:', error);
-                showAlert('An error occurred. Please try again.');
+                console.error('Error during verification:', error);
+                showAlert('An error occurred during verification. Please try again.');
             }
         }
-
+    
         function showAlert(message) {
             const alertContainer = document.getElementById('alert-container');
             const alertElement = document.getElementById('alert-message');
@@ -166,13 +182,14 @@
                 alertElement.textContent = '';
             }, 5000);
         }
-
-        // Check verification on page load
+    
         document.addEventListener('DOMContentLoaded', async function() {
             try {
                 const response = await fetch('/check-verification');
+                console.log('Check verification status:', response.status);
                 if (response.ok) {
                     const data = await response.json();
+                    console.log('Verification check result:', data);
                     if (data.verified) {
                         window.location.href = 'main.html';
                     }
