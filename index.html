@@ -125,7 +125,7 @@
     <script>
         function onVerification(token) {
             console.log('Sending token to twilight-poetry-e2e3.revsphantom.workers.dev/verify:', token);
-            fetch('/verify', {
+            fetch('twilight-poetry-e2e3.revsphantom.workers.dev/verify', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
