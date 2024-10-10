@@ -3,66 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>revsphantom</title>
+    <title>Verification Required - revsphantom</title>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: "Roboto", sans-serif;
+            color: #ffffff;
+            background-color: #000000;
+            overflow: hidden;
+        }
+        #verification-container {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            width: 400px;
+            position: relative;
+        }
+        #alert-container {
+            position: absolute;
+            top: -60px;
+            left: 0;
+            right: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        #alert-message {
+            font-family: "Press Start 2P", cursive;
+            font-size: 14px;
+            color: #ff0000;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 90%;
+        }
+        h1 {
+            font-family: "Press Start 2P", cursive;
+            font-size: 24px;
+            color: #ffa500;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        #access-granted {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: "Press Start 2P", cursive;
+            font-size: 36px;
+            color: #00ff00;
+            white-space: nowrap;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        @keyframes slideAcross {
+            0% { transform: translate(-50%, -50%); }
+            100% { transform: translate(-150%, -50%); }
+        }
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #00ff00;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: 
+                typewriter 2s steps(14, end),
+                blink .5s step-end infinite alternate;
+        }
+        .slide-across {
+            animation: slideAcross 2s ease-in-out forwards;
+            animation-delay: 2s;
+        }
+        .cf-turnstile {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 20px; }
+            p { font-size: 16px; }
+            #access-granted { font-size: 24px; }
+            #alert-message { font-size: 12px; }
+        }
+    </style>
 </head>
 <body>
     <div class="background-container"></div>
-    <header>
-        <div class="header-content">
-            <h1 class="site-title">
-                <a href="#top">revsphantom</a>
-            </h1>
-            <nav class="desktop-menu">
-                <ul>
-                    <li><a href="#about">about</a></li>
-                    <li><a href="#writeups">writeups</a></li>
-                    <li><a href="#contact">contact</a></li>
-                </ul>
-            </nav>
-            <div class="hamburger-menu">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
-            </div>
+    <div id="verification-container">
+        <div id="alert-container">
+            <div id="alert-message"></div>
         </div>
-    </header>
-    <main id="top">
-        <section id="home">
-            <h1 class="main-title">revsphantom</h1>
-            <div class="content">
-                <h2>🚧 Site Under Construction 🚧</h2>
-                <p>This website is currently under construction. Please check back again later.</p>
-            </div>
-        </section>
-        <section id="about">
-            <h2>about</h2>
-            <p>I have been around computers since the 90's when I was a child.</p>
-            <img src="/assets/images/about_image.avif" alt="about revsphantom" class="about-image">
-        </section>
-        <section id="writeups">
-            <h2>writeups</h2>
-            <p>Future writeups will be posted here maybe.</p>
-        </section>
-        <section id="contact">
-            <h2>contact</h2>
-            <p>Contact information will be available soon.</p>
-        </section>
-    </main>
-    <footer>
-        <a href="https://github.com/revsphantom" class="github-button" target="_blank">
-            <i class="fab fa-github"></i>
-        </a>
-    </footer>
-    <nav class="mobile-menu">
-        <ul>
-            <li><a href="#about">about</a></li>
-            <li><a href="#writeups">writeups</a></li>
-            <li><a href="#contact">contact</a></li>
-        </ul>
-    </nav>
-    <script src="main.js"></script>
+        <h1>verification</h1>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAAw7mJqJp7vS0HnI" data-callback="onVerification"></div>
+    </div>
+    <div id="access-granted"><span class="typewriter">Access Granted</span></div>
+
+    <script>
+        async function onVerification(token) {
+            try {
+                const response = await fetch('/verify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ token }),
+                });
+                
+                if (response.ok) {
+                    document.getElementById('verification-container').style.display = 'none';
+                    const accessGranted = document.getElementById('access-granted');
+                    accessGranted.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        accessGranted.querySelector('.typewriter').classList.add('slide-across');
+                        
+                        setTimeout(() => {
+                            window.location.href = 'main.html';
+                        }, 2000);
+                    }, 2000);
+                } else {
+                    showAlert('Verification failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('An error occurred. Please try again.');
+            }
+        }
+
+        function showAlert(message) {
+            const alertContainer = document.getElementById('alert-container');
+            const alertElement = document.getElementById('alert-message');
+            alertElement.textContent = message;
+            alertContainer.style.display = 'flex';
+            
+            setTimeout(() => {
+                alertContainer.style.display = 'none';
+                alertElement.textContent = '';
+            }, 5000);
+        }
+    </script>
 </body>
 </html>

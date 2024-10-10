@@ -125,26 +125,66 @@ footer {
     bottom: 0;
     width: 100%;
 }
-
-.github-button {
-    display: inline-block;
+/*buttons */
+.github-button,
+.htb-button,
+.thm-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     background-color: transparent;
     border-radius: 50%;
     padding: 5px;
     transition: all 0.3s ease;
-    vertical-align: middle;
+    margin: 0 15px;
+    width: 58px;
+    height: 58px;
 }
 
-.github-button i {
+.github-button i,
+.htb-button i,
+.thm-button i {
     font-size: 48px;
-    color: #ffffff;
+    color: #808080;
     transition: color 0.3s ease;
+}
+
+.github-button,
+.htb-button,
+.thm-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 5px;
+    transition: all 0.3s ease;
+    margin: 0 15px;
+    width: 58px;
+    height: 58px;
+    text-decoration: none;
+}
+
+.github-button i,
+.htb-button i,
+.thm-button i {
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+
+.htb-button:hover i {
+    color: #9fef00;
 }
 
 .github-button:hover i {
     color: #ffa500;
 }
 
+.thm-button:hover i {
+    color: #c11111;
+}
+/* */
 .desktop-menu {
     position: absolute;
     right: 20px;
@@ -169,7 +209,7 @@ footer {
 .desktop-menu a:hover {
     color: #ffa500;
 }
-
+/* */
 .hamburger-menu {
     display: none;
     cursor: pointer;
