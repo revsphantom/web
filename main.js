@@ -7,9 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('header');
     const backgroundContainer = document.querySelector('.background-container');
 
-    // Check verification first
-    checkVerification();
-
     function toggleMenu() {
         hamburger.classList.toggle('change');
         mobileMenu.classList.toggle('active');
@@ -100,16 +97,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.dispatchEvent(new Event('scroll'));
 });
-
-// Redirect to verification
-async function checkVerification() {
-    try {
-        const response = await fetch('/check-verification');
-        if (!response.ok) {
-            window.location.href = '/'; 
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        window.location.href = '/';
-    }
-}

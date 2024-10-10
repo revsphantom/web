@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification Required - revsphantom</title>
+    <title>revsphantom</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto&display=swap" rel="stylesheet">
     <style>
@@ -122,72 +123,50 @@
     <div id="access-granted"><span class="typewriter">Access Granted</span></div>
 
     <script>
-        async function onVerification(token) {
-            try {
-                console.log('Verification token received:', token);
-                
-                const response = await fetch('/verify', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ token }),
-                });
-                
-                console.log('Response status:', response.status);
-                
-                const data = await response.json();
-                console.log('Response data:', data);
-                
+        function onVerification(token) {
+            fetch('/verify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token: token }),
+            })
+            .then(response => response.json())
+            .then(data => {
                 if (data.success) {
                     document.getElementById('verification-container').style.display = 'none';
-                    const accessGranted = document.getElementById('access-granted');
-                    accessGranted.style.display = 'block';
-                    
+                    document.getElementById('access-granted').style.display = 'block';
                     setTimeout(() => {
-                        accessGranted.querySelector('.typewriter').classList.add('slide-across');
-                        
-                        setTimeout(() => {
-                            window.location.href = 'main.html';
-                        }, 2000);
+                        window.location.href = '/main.html';
                     }, 2000);
                 } else {
-                    console.error('Verification failed:', data);
-                    showAlert(data.message || 'Verification failed. Please try again.');
+                    const alertMessage = document.getElementById('alert-message');
+                    alertMessage.textContent = 'Verification failed. Please try again.';
+                    alertMessage.style.display = 'block';
                 }
-            } catch (error) {
-                console.error('Error during verification:', error);
-                showAlert('An error occurred during verification. Please try again.');
-            }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const alertMessage = document.getElementById('alert-message');
+                alertMessage.textContent = 'An error occurred. Please try again.';
+                alertMessage.style.display = 'block';
+            });
         }
 
-        function showAlert(message) {
-            const alertContainer = document.getElementById('alert-container');
-            const alertElement = document.getElementById('alert-message');
-            alertElement.textContent = message;
-            alertContainer.style.display = 'flex';
-            
-            setTimeout(() => {
-                alertContainer.style.display = 'none';
-                alertElement.textContent = '';
-            }, 5000);
+        function checkVerification() {
+            fetch('/check-verification')
+            .then(response => response.json())
+            .then(data => {
+                if (data.verified) {
+                    window.location.href = '/main.html';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
 
-        document.addEventListener('DOMContentLoaded', async function() {
-            try {
-                const response = await fetch('/check-verification');
-                console.log('Check verification status:', response.status);
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log('Verification check result:', data);
-                    if (data.verified) {
-                        window.location.href = 'main.html';
-                    }
-                }
-            } catch (error) {
-                console.error('Error checking verification:', error);
-            }
-        });
+        document.addEventListener('DOMContentLoaded', checkVerification);
     </script>
 </body>
 </html>

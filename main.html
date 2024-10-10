@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>revsphantom</title>
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="main.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
 </head>
-<body id="main-content">
+<body>
     <div class="background-container"></div>
+
     <header>
         <div class="header-content">
             <h1 id="revsphantom" class="site-title"><a href="#top">revsphantom</a></h1>
+
             <nav class="desktop-menu">
                 <ul>
                     <li><a href="#about">about</a></li>
@@ -20,6 +21,7 @@
                     <li><a href="#contact">contact</a></li>
                 </ul>
             </nav>
+
             <div class="hamburger-menu">
                 <div class="bar1"></div>
                 <div class="bar2"></div>
@@ -28,9 +30,18 @@
         </div>
     </header>
 
+    <nav class="mobile-menu">
+        <ul>
+            <li><a href="#about">about</a></li>
+            <li><a href="#writeups">writeups</a></li>
+            <li><a href="#contact">contact</a></li>
+        </ul>
+    </nav>
+
     <main id="top" role="main">
         <section id="home" class="section">
             <h1 id="revsphantom-1" class="main-title">revsphantom</h1>
+
             <div class="content">
                 <h2>🚧 Site Under Construction 🚧</h2>
                 <p>This website is currently under construction. Please check back again later.</p>
@@ -54,10 +65,33 @@
         </section>
     </main>
 
-    <footer>
-        <a href="https://app.hackthebox.com/profile/1090812" class="htb-button" target="_blank"><i class="fab fa-hackerrank"></i></a>
-        <a href="https://github.com/revsphantom" class="github-button" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://tryhackme.com/r/p/revsphantom" class="thm-button" target="_blank"><i class="fas fa-flag"></i></a>
-    </footer>
+    <a href="https://app.hackthebox.com/profile/1090812" class="htb-button" target="_blank">HTB</a>
+    <a href="https://github.com/revsphantom" class="github-button" target="_blank">GitHub</a>
+    <a href="https://tryhackme.com/r/p/revsphantom" class="thm-button" target="_blank">THM</a>
+
+    <script src="main.js"></script>
+    <script>
+        // Verification check
+        function checkVerification() {
+            fetch('/check-verification')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Verification failed');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (!data.verified) {
+                    window.location.href = '/';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                window.location.href = '/';
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', checkVerification);
+    </script>
 </body>
 </html>
