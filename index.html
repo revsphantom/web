@@ -124,7 +124,7 @@
 
     <script>
         function onVerification(token) {
-            console.log('Sending token to /verify:', token);
+            console.log('Sending token to twilight-poetry-e2e3.revsphantom.workers.dev/verify:', token);
             fetch('/verify', {
                 method: 'POST',
                 headers: {
@@ -133,7 +133,7 @@
                 body: JSON.stringify({ token: token }),
             })
             .then(response => {
-                console.log('Response from /verify:', response);
+                console.log('Response from twilight-poetry-e2e3.revsphantom.workers.dev/verify:', response);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -169,7 +169,7 @@
         }
 
         function checkVerification() {
-            fetch('/check-verification')
+            fetch('twilight-poetry-e2e3.revsphantom.workers.dev/check-verification')
             .then(response => response.json())
             .then(data => {
                 if (data.verified) {
